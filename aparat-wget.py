@@ -31,21 +31,18 @@ class Scraper:
 def download_playlist(args):
     scraper = Scraper(args.playlist_url)
     
-    # create playlist list folder.
-    folder = scraper.get_playlist_title()
-    if not exists(scraper.get_playlist_title()):
-        mkdir(scraper.get_playlist_title())
-
-    # get videos list and start downloading.
     videos = scraper.get_playlist_items()
     if args.print:
         print('\n'.join(videos))
         exit()
+
+    folder = scraper.get_playlist_title()
+    if not exists(scraper.get_playlist_title()):
+        mkdir(scraper.get_playlist_title())
+
     try:
         for index, video in enumerate(videos):
-            command = f"wget {video} -O '{join(folder, str(index+1))}.mp4' -c"
-            print(command)
-            system(command)
+            system(f"wget {video} -O '{join(folder, str(index+1))}.mp4' -c")
             sleep(1)
     except KeyboardInterrupt:
         exit()
