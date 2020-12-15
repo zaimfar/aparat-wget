@@ -8,8 +8,6 @@ from os import system, mkdir
 from os.path import exists, join
 from time import sleep
 
-QUALITIES = (144, 240, 360, 480, 720, 1080)
-
 class Scraper:
 
     def __init__(self, playlist_url):
